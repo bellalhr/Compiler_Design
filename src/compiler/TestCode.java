@@ -13,9 +13,10 @@ import java.util.Scanner;
  * @author Alamin
  */
 public class TestCode {
-     static String[] operators={"ADD","SUB","MULT","DIV","POW","ASSIGN","PRINT"};
+    static String[] operators={"ADD","SUB","MULT","DIV","POW","ASSIGN","PRINT"};
     static String[] variables={"X","Y","Z"};
     static int x=0,y=0,z=0;
+    static int assignTagX=0,assignTagY=0,assignTagZ=0;
     static String identifiers="",selectedToken="",pointZ="";
     static int identifierValue;
     static boolean isValid=false,isAssignmentOperator=true;
@@ -55,24 +56,24 @@ public class TestCode {
                 }
                 else
                 {
-                    System.out.println("UNEXPECTED COMMAND");                   
+                    System.out.println("UNEXPECTED COMMAND");   
+                    commandList.clear();
+                    identifiersList.clear();
                     continue OUTER;
                 }                               
             } 
             int commandListLength=commandList.size();
             for(int i=0;i<commandList.size();i++)
             {
-                System.out.println(commandList.get(commandListLength-1));
-                commandListLength--;
-                
+               
                 if(commandList.get(commandListLength-1).equals("ASSIGN"))
                 {
-                    assignValue();
+                    //assignValue();
                     if(identifiersList.size()==1)
                     {
-                        System.out.println("Operation is not possible");
+                        System.out.println("OPERATION IS NOT POSSIBLE !!");
                     }
-                    else if(identifiersList.size()==2)
+                    else if(identifiersList.size()>=2)
                     {
                         String value1=identifiersList.get(0);
                         String value2=identifiersList.get(1);
@@ -80,7 +81,7 @@ public class TestCode {
                         int tokenResult2=checkedToken(value2);
                         if(tokenResult1==2) //if the variable is string
                         {
-                            
+                            assignNewValue(value1,value2); 
                         }
                         else{
                             System.out.println("IT'S DOES NOT ASSIGN BECAUSE IT'S INTEGER VALUE");
@@ -88,118 +89,147 @@ public class TestCode {
                         
                         
                     }
-                    else if(identifiersList.size()>2)
-                    {
-                        
-                    }
+              
                 }
+                
                 else if(commandList.get(commandListLength-1).equals("ADD"))
                 {
-                     processExperssion("ADD");
+                    //assignValue();
+                    if(identifiersList.size()==1)
+                    {
+                        System.out.println("OPERATION IS NOT POSSIBLE !!");
+                    }
+                    else if(identifiersList.size()>=2)
+                    {
+                        String value1=identifiersList.get(0);
+                        String value2=identifiersList.get(1);
+                        int tokenResult1=checkedToken(value1);
+                        int tokenResult2=checkedToken(value2);
+                        if(tokenResult1==2) //if the variable is string
+                        {
+                            addNewValue(value1,value2,"ADD"); 
+                        }
+                        else{
+                            System.out.println("IT'S DOES NOT ASSIGN BECAUSE IT'S INTEGER VALUE");
+                        }
+                      
+                    }
+                  
                 }
                 else if(commandList.get(commandListLength-1).equals("SUB"))
                 {
-                    processExperssion("SUB");
+                    //assignValue();
+                    if(identifiersList.size()==1)
+                    {
+                       System.out.println("OPERATION IS NOT POSSIBLE !!");
+                    }
+                    else if(identifiersList.size()>=2)
+                    {
+                        String value1=identifiersList.get(0);
+                        String value2=identifiersList.get(1);
+                        int tokenResult1=checkedToken(value1);
+                        int tokenResult2=checkedToken(value2);
+                        if(tokenResult1==2) //if the variable is string
+                        {
+                            addNewValue(value1,value2,"SUB");
+                        }
+                        else{
+                            System.out.println("IT'S DOES NOT ASSIGN BECAUSE IT'S INTEGER VALUE");
+                        }
+                        
+                        
+                    }
+                    
                 }
-                else if(commandList.get(commandListLength-1).equals("MULT"))
+               else if(commandList.get(commandListLength-1).equals("DIV"))
                 {
-                    processExperssion("MULT");
+                    //assignValue();
+                    if(identifiersList.size()==1)
+                    {
+                        System.out.println("OPERATION IS NOT POSSIBLE !!");
+                    }
+                    else if(identifiersList.size()>=2)
+                    {
+                        String value1=identifiersList.get(0);
+                        String value2=identifiersList.get(1);
+                        int tokenResult1=checkedToken(value1);
+                        int tokenResult2=checkedToken(value2);
+                        if(tokenResult1==2) //if the variable is string
+                        {
+                            addNewValue(value1,value2,"DIV");
+                        }
+                        else{
+                            System.out.println("IT'S DOES NOT ASSIGN BECAUSE IT'S INTEGER VALUE");
+                        }
+                         
+                    }
+                    
                 }
-                else if(commandList.get(commandListLength-1).equals("DIV"))
+               else if(commandList.get(commandListLength-1).equals("MULT"))
                 {
-                    processExperssion("DIV");
+                    //assignValue();
+                    if(identifiersList.size()==1)
+                    {
+                       System.out.println("OPERATION IS NOT POSSIBLE !!");
+                    }
+                    else if(identifiersList.size()>=2)
+                    {
+                        String value1=identifiersList.get(0);
+                        String value2=identifiersList.get(1);
+                        int tokenResult1=checkedToken(value1);
+                        int tokenResult2=checkedToken(value2);
+                        if(tokenResult1==2) //if the variable is string
+                        {
+                            addNewValue(value1,value2,"MULT");
+                        }
+                        else{
+                            System.out.println("IT'S DOES NOT ASSIGN BECAUSE IT'S INTEGER VALUE");
+                        }
+                         
+                    }
+                    
                 }
                 else if(commandList.get(commandListLength-1).equals("POW"))
                 {
-                    processPowerStmt("POW");
+                    //assignValue();
+                    if(identifiersList.size()==1)
+                    {
+                       System.out.println("OPERATION IS NOT POSSIBLE !!");
+                    }
+                    else if(identifiersList.size()>=2)
+                    {
+                        String value1=identifiersList.get(0);
+                        String value2=identifiersList.get(1);
+                        int tokenResult1=checkedToken(value1);
+                        int tokenResult2=checkedToken(value2);
+                        if(tokenResult1==2) //if the variable is string
+                        {
+                            addNewValue(value1,value2,"POW");
+                        }
+                        else{
+                            System.out.println("IT'S DOES NOT ASSIGN BECAUSE IT'S INTEGER VALUE");
+                        }
+                         
+                    }
+                   
                 }
                 else if(commandList.get(commandListLength-1).equals("PRINT"))
                 {
                     printStatement();
-                }      
+                }   
                 
-            }
-            for(int i=0;i<identifiersList.size();i++)
-            {
-                
+                commandListLength--;
+    
             }
             
+            //clear both of list
             
-            
-            
-            
-            
-            if(selectedToken.equals("ASSIGN"))
-            {
-                assignValue();
-            }
-            else if(selectedToken.equals("ADD"))
-            {
-                 processExperssion("ADD");
-            }
-            else if(selectedToken.equals("SUB"))
-            {
-                processExperssion("SUB");
-            }
-            else if(selectedToken.equals("MULT"))
-            {
-                processExperssion("MULT");
-            }
-            else if(selectedToken.equals("DIV"))
-            {
-                processExperssion("DIV");
-            }
-            else if(selectedToken.equals("POW"))
-            {
-                processPowerStmt("POW");
-            }
-            else if(selectedToken.equals("PRINT"))
-            {
-                printStatement();
-            }      
+            commandList.clear();
+            identifiersList.clear();
+          
         }
     }
     
-    private static void processExperssion(String command)
-    {
-        if(identifiers.equals("X"))
-             {
-                 if(x!=0)
-                 {
-                     //x=x-identifierValue;
-                     executeStatementToX(command);
-                     System.out.println("SUCCESS");
-                 }
-                 else{
-                     System.out.println("NO VAL ASSIGN TO X");
-                 }
-             }
-             else if(identifiers.equals("Y"))
-             {
-                 if(y!=0)
-                 {
-                     //y=y-identifierValue;
-                     executeStatementToY(command);
-                     System.out.println("SUCCESS");
-                 }
-                 else{
-                     System.out.println("NO VAL ASSIGN TO Y");
-                 }
-             }
-             else if(identifiers.equals("Z"))
-             {
-                 if(z!=0)
-                 {
-                     //z=z-identifierValue;
-                     executeStatementToZ(command);
-                     System.out.println("SUCCESS");
-                 }
-                 else{
-                     System.out.println("NO VAL ASSIGN TO Z");
-                 }
-             }
-    }
-
     private static void processPowerStmt(String powerStmt)
     {
          if(identifiers.equals("X"))
@@ -240,75 +270,6 @@ public class TestCode {
              }
     }
 
-    private static void executeStatementToX(String stmt)
-    {
-        if(stmt.equals("ADD"))
-            x=x+identifierValue;
-        else if(stmt.equals("SUB"))
-            x=x-identifierValue;
-        else if(stmt.equals("MULT"))
-            x=x*identifierValue;
-        else if(stmt.equals("DIV"))
-            x=x/identifierValue;
-        else if(stmt.equals("ASSIGN"))
-            x=identifierValue;          
-    }
-    private static void executeStatementToY(String stmt)
-    {
-        if(stmt.equals("ADD"))
-            y=y+identifierValue;
-        else if(stmt.equals("SUB"))
-            y=y-identifierValue;
-        else if(stmt.equals("MULT"))
-            y=y*identifierValue;
-        else if(stmt.equals("DIV"))
-            y=y/identifierValue;
-        else if(stmt.equals("ASSIGN"))
-            y=identifierValue;          
-    }
-    private static void executeStatementToZ(String stmt)
-    {
-        if(stmt.equals("ADD"))
-            z=z+identifierValue;
-        else if(stmt.equals("SUB"))
-            z=z-identifierValue;
-        else if(stmt.equals("MULT"))
-            z=z*identifierValue;
-        else if(stmt.equals("DIV"))
-            z=z/identifierValue;
-        else if(stmt.equals("ASSIGN"))
-            z=identifierValue;
-    }
-
-    private static void assignValue()
-    {
-        if(identifiers.equals("X"))
-         {
-             if(x==0)
-             {
-                 x=identifierValue;
-                 System.out.println("SUCCESS");
-             }
-         }
-         else if(identifiers.equals("Y"))
-         {
-             if(y==0)
-             {
-                 y=identifierValue;
-                 System.out.println("SUCCESS");
-             }
-         }
-         else if(identifiers.equals("Z"))
-         {
-             if(z==0)
-             {
-                 z=identifierValue;
-                 System.out.println("SUCCESS");
-             }
-
-         }
-    }
-
     private static int checkedToken(String token)
     {
      for(int i=0;i<operators.length;i++)
@@ -335,20 +296,488 @@ public class TestCode {
 
     private static void printStatement()
      {
-         if(identifiers.equals("X"))
+         if(identifiersList.get(0).equals("X"))
          {
              System.out.println("PRINTING X "+x);
          }
-         else if(identifiers.equals("Y"))
+         else if(identifiersList.get(0).equals("Y"))
          {
              System.out.println("PRINTING Y "+y);
          }
-         else if(identifiers.equals("Z"))
+         else if(identifiersList.get(0).equals("Z"))
          {
              System.out.println("PRINTING Z "+z);
          }
      }
 
-    
-    
+    //added new code
+    private static void assignNewValue(String value1, String value2) {
+         if(value1.equals("X"))
+         {
+             assignTagX=1; //If assign any value to x then its have to tag is 1
+             int variableType=checkedToken(value2);
+             if(variableType==1 || variableType==2 || variableType==3) 
+             {
+                 identifiersList.remove(0);
+                 identifiersList.remove(0);
+                 identifiersList.add(0, "X");
+             }
+             if(variableType==3)
+             {
+                 x=Integer.valueOf(value2);
+                 System.out.println("SUCCESS");
+             }
+             if(value2.equals("X"))
+             {
+                 //remove first two item from the identifier list
+                
+                 x=x;
+                 System.out.println("SUCCESS");
+             }
+             else if(value2.equals("Y"))
+             {
+               
+                 if(assignTagY==1)
+                 {
+                     x=y;
+                    System.out.println("SUCCESS");
+                 }
+                 else{
+                     System.out.println("NO VALUE ASSIGN TO Y");
+                 }
+             }
+             else if(value2.equals("Z"))
+             {
+                 
+                 if(assignTagZ==1)
+                 {
+                     x=z;
+                    System.out.println("SUCCESS");
+                 }
+                 else{
+                     System.out.println("NO VALUE ASSIGN TO Z");
+                 }
+             }
+             
+         }
+         else if(value1.equals("Y"))
+         {
+             assignTagY=1; //If assign any value to x then its have to tag is 1
+             int variableType=checkedToken(value2);
+             if(variableType==1 || variableType==2 || variableType==3) 
+             {
+                 identifiersList.remove(0);
+                 identifiersList.remove(0);
+                 identifiersList.add(0, "Y");
+             }
+             if(variableType==3)
+             {
+      
+                 y=Integer.valueOf(value2);
+                 System.out.println("SUCCESS");
+             }
+         
+             if(value2.equals("X"))
+             {
+                 if(assignTagX==1)
+                 {
+                     y=x;
+                     System.out.println("SUCCESS");
+                 }
+                 else{
+                      System.out.println("NO VALUE ASSIGN TO X");
+                 }
+             }
+             else if(value2.equals("Y"))
+             {
+                 y=y;
+                 System.out.println("SUCCESS");
+             }
+             else if(value2.equals("Z"))
+             {
+                 
+                 
+                 if(assignTagZ==1)
+                 {
+                     y=z;
+                    System.out.println("SUCCESS");
+                 }
+                 else{
+                      System.out.println("NO VALUE ASSIGN TO Z");
+                 }
+             }
+             
+         }
+         else if(value1.equals("Z"))
+         {
+             assignTagZ=1; //If assign any value to x then its have to tag is 1
+             int variableType=checkedToken(value2);
+             if(variableType==1 || variableType==2 || variableType==3) 
+             {
+                 identifiersList.remove(0);
+                 identifiersList.remove(0);
+                 identifiersList.add(0, "Z");
+             }
+             if(variableType==3)
+             {
+      
+                 z=Integer.valueOf(value2);
+                 System.out.println("SUCCESS");
+             }
+            if(value2.equals("X"))
+             {
+                 
+                 //System.out.println("SUCCESS");
+                 
+                 if(assignTagX==1)
+                 {
+                     z=x;
+                     System.out.println("SUCCESS");
+                 }
+                 else{
+                      System.out.println("NO VALUE ASSIGN TO X");
+                 }
+                 
+             }
+             else if(value2.equals("Y"))
+             {
+                 
+                 //System.out.println("SUCCESS");
+                 
+                 if(assignTagY==1)
+                 {
+                    z=y;
+                    System.out.println("SUCCESS");
+                 }
+                 else{
+                     System.out.println("NO VALUE ASSIGN TO Y");
+                 }
+             }
+             else if(value2.equals("Z"))
+             {
+                 
+                 //System.out.println("SUCCESS");
+                 
+                 if(assignTagZ==1)
+                 {
+                    z=z;
+                    System.out.println("SUCCESS");
+                 }
+                 else{
+                      System.out.println("NO VALUE ASSIGN TO Z");
+                 }
+             }
+         }
+    }
+
+    private static void addNewValue(String value1, String value2,String command) {
+         if(value1.equals("X"))
+         {
+             int variableType=checkedToken(value2);
+             if(variableType==1 || variableType==2 || variableType==3) 
+             {
+                 identifiersList.remove(0);
+                 identifiersList.remove(0);
+                 identifiersList.add(0, "X");
+             }
+             if(variableType==3)
+             {
+                 if(assignTagX==1)
+                 {
+                      //assignNewToX(command,x);
+                    if(command.equals("ADD"))
+                       x+=Integer.valueOf(value2);
+                    else if(command.equals("SUB"))
+                        x-=Integer.valueOf(value2);
+                    else if(command.equals("MULT"))
+                        x*=Integer.valueOf(value2);
+                    else if(command.equals("DIV"))
+                        x/=Integer.valueOf(value2);
+                    else if(command.equals("POW"))
+                        x=(int)Math.pow(x, Integer.valueOf(value2));
+                    //assignNewValue
+                    System.out.println("SUCCESS");
+                 }
+                 else{
+                     System.out.println("NO VAL ASSIGN TO X");
+                 }
+                
+             }
+             if(value2.equals("X"))
+             {
+                 //remove first two item from the identifier list
+                 if(assignTagX==1)
+                 {
+                    if(command.equals("ADD"))
+                        x+=x;
+                     else if(command.equals("SUB"))
+                         x-=x;
+                     else if(command.equals("MULT"))
+                         x*=x;
+                     else if(command.equals("DIV"))
+                         x/=x;
+                    else if(command.equals("POW"))
+                        x=(int)Math.pow(x,x);
+                     System.out.println("SUCCESS");
+                 }
+                 else{
+                     System.out.println("NO VAL ASSIGN TO X");
+                 }
+             }
+             else if(value2.equals("Y"))
+             {
+                 if(assignTagX==1 && assignTagY==1)
+                 {
+                    if(command.equals("ADD"))
+                    x+=y;
+                    else if(command.equals("SUB"))
+                        x-=y;
+                    else if(command.equals("MULT"))
+                        x*=y;
+                    else if(command.equals("DIV"))
+                        x/=y;
+                    else if(command.equals("POW"))
+                        x=(int)Math.pow(x,y);
+                   // System.out.println("SUCCESS");
+                    //x+=y;
+                    System.out.println("SUCCESS");
+                 }
+                 
+                 else{
+                     System.out.println("NO VAL ASSIGN TO X OR Y");
+                 }
+                 
+             }
+         
+             else if(value2.equals("Z"))
+             {
+                 if(assignTagZ==1 && assignTagX==1)
+                 {
+                     if(command.equals("ADD"))
+                        x+=z;
+                     else if(command.equals("SUB"))
+                         x-=z;
+                     else if(command.equals("MULT"))
+                         x*=z;
+                     else if(command.equals("DIV"))
+                         x/=z;
+                     else if(command.equals("POW"))
+                        x=(int)Math.pow(x,z);
+                     //x+=z;
+                     System.out.println("SUCCESS");
+                 }
+                 else{
+                     System.out.println("NO VAL ASSIGN TO X OR Z");
+                 }
+             }
+             
+         }
+         else if(value1.equals("Y"))
+         {
+             int variableType=checkedToken(value2);
+             if(variableType==1 || variableType==2 || variableType==3) 
+             {
+                 identifiersList.remove(0);
+                 identifiersList.remove(0);
+                 identifiersList.add(0, "Y");
+             }
+             if(variableType==3)
+             {
+                 if(assignTagY==1)
+                 {
+                    if(command.equals("ADD"))
+                        y+=Integer.valueOf(value2);
+                    else if(command.equals("SUB"))
+                        y-=Integer.valueOf(value2);
+                    else if(command.equals("MULT"))
+                        y*=Integer.valueOf(value2);
+                    else if(command.equals("DIV"))
+                        y/=Integer.valueOf(value2);
+                    else if(command.equals("POW"))
+                        y=(int)Math.pow(y,Integer.valueOf(value2));
+                    //y+=Integer.valueOf(value2);
+                    System.out.println("SUCCESS");
+                 }
+                  else{
+                     System.out.println("NO VAL ASSIGN TO Y");
+                 }
+             }
+         
+             if(value2.equals("X"))
+             {
+                
+                 if(assignTagY==1 && assignTagX==1)
+                 {
+                     if(command.equals("ADD"))
+                        y+=x;
+                    else if(command.equals("SUB"))
+                        y-=x;
+                    else if(command.equals("MULT"))
+                        y*=x;
+                    else if(command.equals("DIV"))
+                        y/=x;
+                     else if(command.equals("POW"))
+                        y=(int)Math.pow(y,x);
+                 //y+=x;
+                 System.out.println("SUCCESS");
+                 }
+                  else{
+                     System.out.println("NO VAL ASSIGN TO X OR Y");
+                 }
+             }
+             else if(value2.equals("Y"))
+             {
+                
+                 
+                 if(assignTagY==1)
+                 {
+                     if(command.equals("ADD"))
+                        y+=y;
+                     else if(command.equals("SUB"))
+                         y-=y;
+                     else if(command.equals("MULT"))
+                         y*=y;
+                     else if(command.equals("DIV"))
+                         y/=y;
+                     else if(command.equals("POW"))
+                        y=(int)Math.pow(y,y);
+                     //y+=y;
+                     System.out.println("SUCCESS");
+                 }
+                  else{
+                     System.out.println("NO VAL ASSIGN TO Y");
+                 }
+                 
+             }
+             else if(value2.equals("Z"))
+             {
+                
+                 
+                 if(assignTagY==1 && assignTagZ==1)
+                 {
+                     if(command.equals("ADD"))
+                        y+=z;
+                     else if(command.equals("SUB"))
+                         y-=z;
+                     else if(command.equals("MULT"))
+                         y*=z;
+                     else if(command.equals("DIV"))
+                         y/=z;
+                     else if(command.equals("POW"))
+                        y=(int)Math.pow(y,z);
+                     //y+=z;
+                     System.out.println("SUCCESS");
+                 }
+                  else{
+                     System.out.println("NO VAL ASSIGN TO Y");
+                 }
+             }
+             
+         }
+         else if(value1.equals("Z"))
+         {
+             int variableType=checkedToken(value2);
+             if(variableType==1 || variableType==2 || variableType==3) 
+             {
+                 identifiersList.remove(0);
+                 identifiersList.remove(0);
+                 identifiersList.add(0, "Z");
+             }
+             if(variableType==3)
+             {
+                 
+                 
+                 if(assignTagZ==1)
+                 {
+                    if(command.equals("ADD"))
+                        z+=Integer.valueOf(value2);
+                     else if(command.equals("SUB"))
+                         z-=Integer.valueOf(value2);
+                     else if(command.equals("MULT"))
+                         z*=Integer.valueOf(value2);
+                     else if(command.equals("DIV"))
+                         z/=Integer.valueOf(value2);
+                    else if(command.equals("POW"))
+                        z=(int)Math.pow(z,Integer.valueOf(value2));
+
+                     //z+=Integer.valueOf(value2);
+                     System.out.println("SUCCESS");
+                     }
+                  else{
+                     System.out.println("NO VAL ASSIGN TO Z");
+                 }
+             }
+            if(value2.equals("X"))
+             {
+                 
+                 
+                  if(assignTagZ==1 && assignTagX==1)
+                  {
+                     if(command.equals("ADD"))
+                        z+=x;
+                     else if(command.equals("SUB"))
+                         z-=x;
+                     else if(command.equals("MULT"))
+                         z*=x;
+                     else if(command.equals("DIV"))
+                         z/=x;
+                     else if(command.equals("POW"))
+                        z=(int)Math.pow(z,x);
+                    // z+=x;
+                     System.out.println("SUCCESS");
+                  }
+                  else{
+                     System.out.println("NO VAL ASSIGN TO Z OR X");
+                 }
+             }
+             else if(value2.equals("Y"))
+             {
+                 
+                 
+                 if(assignTagZ==1 && assignTagY==1)
+                  {
+                     if(command.equals("ADD"))
+                        z+=y;
+                     else if(command.equals("SUB"))
+                         z-=y;
+                     else if(command.equals("MULT"))
+                         z*=y;
+                     else if(command.equals("DIV"))
+                         z/=y;
+                     else if(command.equals("POW"))
+                        z=(int)Math.pow(z,y);
+                     //z+=y;
+                     System.out.println("SUCCESS");
+                  }
+                  else{
+                     System.out.println("NO VAL ASSIGN TO Z OR Y");
+                 }
+             }
+             else if(value2.equals("Z"))
+             {
+                 
+                 
+                 if(assignTagZ==1)
+                  {
+                     if(command.equals("ADD"))
+                        z+=z;
+                     else if(command.equals("SUB"))
+                         z-=z;
+                     else if(command.equals("MULT"))
+                         z*=z;
+                     else if(command.equals("DIV"))
+                         z/=z;
+                     else if(command.equals("POW"))
+                        z=(int)Math.pow(z,z);
+                    // z+=z;
+                     System.out.println("SUCCESS");
+                  }
+                  else{
+                     System.out.println("NO VAL ASSIGN TO Z");
+                 }
+             }
+         }
+    }
+
+   
 }
